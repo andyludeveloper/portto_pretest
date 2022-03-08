@@ -3,7 +3,7 @@ package com.andyludeveloper.portto.fragment
 import android.os.Bundle
 import android.view.View
 import androidx.fragment.app.Fragment
-import androidx.fragment.app.viewModels
+import androidx.fragment.app.activityViewModels
 import androidx.navigation.findNavController
 import androidx.recyclerview.widget.GridLayoutManager
 import androidx.recyclerview.widget.RecyclerView
@@ -16,7 +16,8 @@ import dagger.hilt.android.AndroidEntryPoint
 
 @AndroidEntryPoint
 class CollectionFragment : Fragment(R.layout.fragment_collection_list) {
-    private val driverViewModel: CollectionViewModel by viewModels()
+    private val collectionViewModel: CollectionViewModel by activityViewModels()
+
     private lateinit var requestManager: RequestManager
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -26,11 +27,11 @@ class CollectionFragment : Fragment(R.layout.fragment_collection_list) {
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
 
-        driverViewModel.collections.observe(viewLifecycleOwner) {
+        collectionViewModel.collections.observe(viewLifecycleOwner) {
             if (view is RecyclerView) {
                 with(view) {
                     layoutManager = GridLayoutManager(context, Constants.COLUMN_COUNT)
-                    adapter = CollectionRecyclerViewAdapter(requestManager, it, findNavController())
+                    adapter = CollectionRecyclerViewAdapter(requestManager, it, findNavController(), collectionViewModel)
                 }
             }
         }

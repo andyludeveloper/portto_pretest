@@ -20,6 +20,9 @@ constructor(private val repository: CollectionRepository) : ViewModel() {
     private var _collections: MutableLiveData<List<Asset>> = MutableLiveData()
     val collections: LiveData<List<Asset>> = _collections
 
+    private var _currentAsset: MutableLiveData<Asset> = MutableLiveData()
+    val currentAsset:LiveData<Asset> = _currentAsset
+
     init {
         loadData()
     }
@@ -34,5 +37,9 @@ constructor(private val repository: CollectionRepository) : ViewModel() {
                 }
             }
         }
+    }
+
+    fun setCurrentAsset(asset: Asset) {
+        _currentAsset.value = asset
     }
 }

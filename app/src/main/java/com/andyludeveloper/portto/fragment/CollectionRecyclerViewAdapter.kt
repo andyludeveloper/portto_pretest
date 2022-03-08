@@ -1,6 +1,5 @@
 package com.andyludeveloper.portto.fragment
 
-import android.util.Log
 import android.view.LayoutInflater
 import android.view.ViewGroup
 import android.widget.ImageView
@@ -10,6 +9,8 @@ import androidx.recyclerview.widget.RecyclerView
 import com.andyludeveloper.portto.R
 import com.andyludeveloper.portto.databinding.FragmentCollectionBinding
 import com.andyludeveloper.portto.model.Asset
+import com.andyludeveloper.portto.utils.downloadImage
+import com.andyludeveloper.portto.viewmodel.CollectionViewModel
 import com.bumptech.glide.RequestManager
 
 
@@ -20,8 +21,8 @@ constructor(
     private val requestManager: RequestManager,
     private var data: List<Asset>,
     private val navController: NavController,
+    private val viewModel: CollectionViewModel
 ) : RecyclerView.Adapter<CollectionRecyclerViewAdapter.ViewHolder>() {
-
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): ViewHolder {
 
         return ViewHolder(
@@ -35,9 +36,12 @@ constructor(
 
     override fun onBindViewHolder(holder: ViewHolder, position: Int) {
         val item = data[position]
-        holder.itemView.setOnClickListener { navController.navigate(R.id.action_collectionFragment_to_detailFragment) }
+        holder.itemView.setOnClickListener {
+            viewModel.setCurrentAsset(item)
+            navController.navigate(R.id.action_collectionFragment_to_detailFragment)
+        }
         holder.name.text = item.name
-        downloadImage(item.image_url, holder.image)
+        requestManager.downloadImage(item.image_url, holder.image)
     }
 
     override fun getItemCount(): Int = data.size
@@ -47,10 +51,4 @@ constructor(
         val name: TextView = binding.text
         val image: ImageView = binding.image
     }
-
-    private fun downloadImage(url: String, imageView: ImageView) {
-        Log.d(TAG, "downloadImage: $url")
-        requestManager.load(url).into(imageView)
-    }
-
 }
