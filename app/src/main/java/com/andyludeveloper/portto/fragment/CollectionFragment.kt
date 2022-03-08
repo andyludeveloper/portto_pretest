@@ -1,10 +1,10 @@
 package com.andyludeveloper.portto.fragment
 
-import android.graphics.drawable.PictureDrawable
 import android.os.Bundle
 import android.view.View
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.viewModels
+import androidx.navigation.findNavController
 import androidx.recyclerview.widget.GridLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 import com.andyludeveloper.portto.R
@@ -30,7 +30,7 @@ class CollectionFragment : Fragment(R.layout.fragment_collection_list) {
             if (view is RecyclerView) {
                 with(view) {
                     layoutManager = GridLayoutManager(context, Constants.COLUMN_COUNT)
-                    adapter = CollectionRecyclerViewAdapter(requestManager, it)
+                    adapter = CollectionRecyclerViewAdapter(requestManager, it, findNavController())
                 }
             }
         }

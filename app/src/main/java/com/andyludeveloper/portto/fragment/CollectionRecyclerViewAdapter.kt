@@ -5,10 +5,13 @@ import android.view.LayoutInflater
 import android.view.ViewGroup
 import android.widget.ImageView
 import android.widget.TextView
+import androidx.navigation.NavController
 import androidx.recyclerview.widget.RecyclerView
+import com.andyludeveloper.portto.R
 import com.andyludeveloper.portto.databinding.FragmentCollectionBinding
 import com.andyludeveloper.portto.model.Asset
 import com.bumptech.glide.RequestManager
+
 
 private const val TAG = "ViewAdapter"
 
@@ -16,6 +19,7 @@ class CollectionRecyclerViewAdapter
 constructor(
     private val requestManager: RequestManager,
     private var data: List<Asset>,
+    private val navController: NavController,
 ) : RecyclerView.Adapter<CollectionRecyclerViewAdapter.ViewHolder>() {
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): ViewHolder {
@@ -31,6 +35,7 @@ constructor(
 
     override fun onBindViewHolder(holder: ViewHolder, position: Int) {
         val item = data[position]
+        holder.itemView.setOnClickListener { navController.navigate(R.id.action_collectionFragment_to_detailFragment) }
         holder.name.text = item.name
         downloadImage(item.image_url, holder.image)
     }
@@ -47,4 +52,5 @@ constructor(
         Log.d(TAG, "downloadImage: $url")
         requestManager.load(url).into(imageView)
     }
+
 }

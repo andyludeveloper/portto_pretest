@@ -9,7 +9,11 @@
         android:id="@+id/detailFragment"
         android:name="com.andyludeveloper.portto.fragment.DetailFragment"
         android:label="fragment_detail"
-        tools:layout="@layout/fragment_detail" />
+        tools:layout="@layout/fragment_detail" >
+        <action
+            android:id="@+id/action_detailFragment_to_collectionFragment"
+            app:destination="@id/collectionFragment" />
+    </fragment>
     <fragment
         android:id="@+id/collectionFragment"
         android:name="com.andyludeveloper.portto.fragment.CollectionFragment"
