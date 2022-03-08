@@ -1,6 +1,5 @@
 package com.andyludeveloper.portto.fragment
 
-import android.graphics.drawable.PictureDrawable
 import android.util.Log
 import android.view.LayoutInflater
 import android.view.ViewGroup
@@ -9,21 +8,25 @@ import android.widget.TextView
 import androidx.recyclerview.widget.RecyclerView
 import com.andyludeveloper.portto.databinding.FragmentCollectionBinding
 import com.andyludeveloper.portto.model.Asset
-import com.bumptech.glide.RequestBuilder
+import com.bumptech.glide.RequestManager
 
 private const val TAG = "ViewAdapter"
 
 class CollectionRecyclerViewAdapter
 constructor(
-    private val requestManager: RequestBuilder<PictureDrawable>,
+    private val requestManager: RequestManager,
     private var data: List<Asset>,
 ) : RecyclerView.Adapter<CollectionRecyclerViewAdapter.ViewHolder>() {
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): ViewHolder {
 
-        return ViewHolder(FragmentCollectionBinding.inflate(LayoutInflater.from(parent.context),
-            parent,
-            false))
+        return ViewHolder(
+            FragmentCollectionBinding.inflate(
+                LayoutInflater.from(parent.context),
+                parent,
+                false
+            )
+        )
     }
 
     override fun onBindViewHolder(holder: ViewHolder, position: Int) {

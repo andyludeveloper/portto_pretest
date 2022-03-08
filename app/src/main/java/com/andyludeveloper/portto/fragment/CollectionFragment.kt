@@ -8,28 +8,21 @@ import androidx.fragment.app.viewModels
 import androidx.recyclerview.widget.GridLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 import com.andyludeveloper.portto.R
-import com.andyludeveloper.portto.svg.SvgSoftwareLayerSetter
 import com.andyludeveloper.portto.utils.Constants
 import com.andyludeveloper.portto.viewmodel.CollectionViewModel
 import com.bumptech.glide.Glide
-import com.bumptech.glide.RequestBuilder
 import com.bumptech.glide.RequestManager
-import com.bumptech.glide.load.resource.drawable.DrawableTransitionOptions.withCrossFade
 import dagger.hilt.android.AndroidEntryPoint
 
 @AndroidEntryPoint
 class CollectionFragment : Fragment(R.layout.fragment_collection_list) {
     private val driverViewModel: CollectionViewModel by viewModels()
-    private lateinit var requestManager: RequestBuilder<PictureDrawable>
+    private lateinit var requestManager: RequestManager
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         requestManager = Glide.with(requireContext())
-            .`as`(PictureDrawable::class.java)
-            .placeholder(R.drawable.image_loading)
-            .error(R.drawable.image_error)
-            .transition(withCrossFade())
-            .listener(SvgSoftwareLayerSetter())
     }
+
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
 

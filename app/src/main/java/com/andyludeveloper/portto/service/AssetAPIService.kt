@@ -1,15 +1,14 @@
 package com.andyludeveloper.portto.service
 
 import com.andyludeveloper.portto.model.Assets
-import okhttp3.ResponseBody
-import retrofit2.Call
 import retrofit2.Response
 import retrofit2.http.GET
+import retrofit2.http.Headers
 import retrofit2.http.Query
-import retrofit2.http.Url
 
 
 interface AssetAPIService {
+    @Headers("X-API-KEY:5b294e9193d240e39eefc5e6e551ce83")
     @GET("assets")
     suspend fun getCollection(
         @Query("offset") offset: Int,
