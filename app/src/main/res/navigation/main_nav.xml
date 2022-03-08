@@ -1,0 +1,22 @@
+<?xml version="1.0" encoding="utf-8"?>
+<navigation xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/main_nav"
+    app:startDestination="@id/collectionFragment">
+
+    <fragment
+        android:id="@+id/detailFragment"
+        android:name="com.andyludeveloper.portto.fragment.DetailFragment"
+        android:label="fragment_detail"
+        tools:layout="@layout/fragment_detail" />
+    <fragment
+        android:id="@+id/collectionFragment"
+        android:name="com.andyludeveloper.portto.fragment.CollectionFragment"
+        android:label="fragment_collection_list"
+        tools:layout="@layout/fragment_collection_list" >
+        <action
+            android:id="@+id/action_collectionFragment_to_detailFragment"
+            app:destination="@id/detailFragment" />
+    </fragment>
+</navigation>
