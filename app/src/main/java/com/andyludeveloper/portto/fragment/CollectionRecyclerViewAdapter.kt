@@ -1,5 +1,6 @@
 package com.andyludeveloper.portto.fragment
 
+import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.ViewGroup
 import android.widget.ImageView
@@ -21,7 +22,7 @@ constructor(
     private val requestManager: RequestManager,
     private var data: List<Asset>,
     private val navController: NavController,
-    private val viewModel: CollectionViewModel
+    private val viewModel: CollectionViewModel,
 ) : RecyclerView.Adapter<CollectionRecyclerViewAdapter.ViewHolder>() {
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): ViewHolder {
 
@@ -38,7 +39,7 @@ constructor(
         val item = data[position]
         holder.itemView.setOnClickListener {
             viewModel.setCurrentAsset(item)
-            navController.navigate(R.id.action_collectionFragment_to_detailFragment)
+            navController.navigate(R.id.action_collectionFragment_to_detailFragment )
         }
         holder.name.text = item.name
         requestManager.downloadImage(item.image_url, holder.image)

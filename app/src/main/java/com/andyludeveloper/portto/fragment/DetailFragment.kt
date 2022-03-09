@@ -7,8 +7,10 @@ import android.view.View
 import android.widget.Button
 import android.widget.ImageView
 import android.widget.TextView
+import androidx.appcompat.app.AppCompatActivity
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.activityViewModels
+import com.andyludeveloper.portto.MainActivity
 import com.andyludeveloper.portto.R
 import com.andyludeveloper.portto.viewmodel.CollectionViewModel
 import com.bumptech.glide.Glide
@@ -30,8 +32,8 @@ class DetailFragment : Fragment(R.layout.fragment_detail) {
         val imageView = view.findViewById<ImageView>(R.id.image)
         val descriptionView = view.findViewById<TextView>(R.id.description)
         val permalinkBtn = view.findViewById<Button>(R.id.permalink)
-
         collectionViewModel.currentAsset.observe(viewLifecycleOwner) { asset ->
+            (requireActivity() as AppCompatActivity).supportActionBar?.title = asset.collection.name
             textView.text = asset.name
             requestManager.load(asset.image_url).into(imageView)
             descriptionView.text = asset.collection.description
